@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Draw</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/draw.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+    <div class="">
+        <div class="row">
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form id="loginForm">
+                    <h4 id="title"></h4>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" autocomplete="off" placeholder="name..." id="nameInput">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="submit">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+
+        <!-- Top Buttons Row -->
+        
+        <div class="row hidden" id="canvasButtonsRow" style="margin-left:35px">
+            
+            <div class="thickness small"  data-thickness="1">1</div>
+            <div class="thickness medium" data-thickness="3">3</div>
+            <div class="thickness big"    data-thickness="6">6</div>
+            <div class="thickness bigger" data-thickness="10">10</div>
+            <div class="thickness biggest"    data-thickness="14">14</div>
+            <h4 id="title2"  style="margin-left:15px"></h4>
+            <div class="col" style=" margin-bottom:20px">
+                <input type="file" onchange="previewImage(this);">
+                <img id="preview" class="hidden">
+                <button id="imageSet" class="btn cancel">Set image</button>
+                <button id="undo"class="btn cancel"><i class="fa fa-undo"></i>Undo</button>
+                <button id="clear"class="btn cancel"><i class="fa fa-trash"></i>Clear</button>
+                <button id="circle"class="btn cancel"><i class="fa fa-circle"></i>Circle</button>
+                <button id="download"class="btn cancel"><i class="fa fa-download"></i>Download</button>
+                <button id="text" class="btn cancel"><i class="fa fa-text"></i>Text</button>
+                <button id="eraser" class="btn cancel"> <i class="fa fa-eraser"></i>Eraser</button>
+                <button id="open" class="btn cancel" onclick="closeForm()"><i class="fa fa-open"></i>Close</button>
+                <button id="close" class="btn cancel" onclick="openForm()"><i class="fa fa-close"></i>Open</button>
+                
+            </div>
+            
+                <div id="colors" style="margin-right:200px"></div>
+                <!-- Colors -->
+ 
+                <!-- Thickness -->
+            </div>
+            </div>
+        </div>
+        
+        <div class="row">
+             <div class='row' id="chat-stuff">
+                <div class='col-md-2' id='chatters'>
+                    <h3>Users</h3>
+                        <ul>
+                        </ul>
+                </div>
+        </div>
+            <div class="col" id="canvasContainer">
+                <!-- Drawing Canvas -->
+                <canvas id="canvas" class="hidden"></canvas>
+            </div>
+          
+            <script> 
+                function previewImage(input) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("preview").setAttribute("src", e.target.result);
+                    
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+        </script>
+            
+            <div class="">
+                <div class="row">
+                    <div class="col" id="messagesContainer" style="width: 250px">
+                        <!-- Chat Messages Here -->
+<script>function openForm() {
+    document.getElementById("messagesContainer").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("messagesContainer").style.display = "none";
+  } </script>
+                      
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form id="messageForm" class="hidden">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" autocomplete="off" placeholder="chat..." id="messageInput">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js" type="module"></script>
+    <script src="/js/draw.js" type="module"></script>
+
+</body>
+</html>
+
+
+<!-- Modal Section-->
+
