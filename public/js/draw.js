@@ -152,7 +152,7 @@ function onResize() {
 
 function onPageLoad() {
     // Canvas
-    initCanvas()
+    initCanvasFunction()
     state.refresh()
     
     // Undo button
@@ -241,7 +241,7 @@ function undo() {
     }
 }
 
-function initCanvas() {
+function initCanvasFunction() {
     // Canvas
     _canvasContainer = document.getElementById('canvasContainer');
     _canvas = document.getElementById('canvas')
@@ -268,7 +268,7 @@ function initCanvas() {
             context.fill()
             context.beginPath()
             context.moveTo(x, y)
-            Remote.send(Remote.e.mouseMove, foldScale(x, y))
+            Remote.send(Remote.e.mouseMove, resizeScale(x, y))
         }
     }
 
@@ -280,7 +280,7 @@ function initCanvas() {
 
     function mouseDown(e) {
         const [x, y] = getMousePos(e)
-        Remote.send(Remote.e.mouseDown, foldScale(x, y))
+        Remote.send(Remote.e.mouseDown, resizeScale(x, y))
         // Update undoStack
         const image = context.getImageData(_canvas.clientLeft, _canvas.clientTop, _canvas.width, _canvas.height)
         state.undoStack.push(image)
@@ -291,14 +291,14 @@ function initCanvas() {
 
 }
 
-function unFoldScale(x, y) {
+function unResizeScale(x, y) {
     return [
         x * _canvas.width,
         y * _canvas.height,
     ]
 }
 
-function foldScale(x, y) {
+function resizeScale(x, y) {
     return [
         x / _canvas.width,
         y / _canvas.height,
@@ -349,7 +349,7 @@ const Remote = {
     init() {
         console.log('Remote init()')
         socket.on(this.e.mouseMove, ([x, y]) => {
-            [x, y] = unFoldScale(x, y)
+            [x, y] = unResizeScale(x, y)
             context.lineTo(x, y)
             context.stroke()
             context.beginPath()
