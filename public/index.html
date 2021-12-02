@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Socket.IO chat</title>
+</head>
+<style>
+</style>
+<body>
+<h1 style="text-align: center;">WORK IN PROGRESS</h1>
+  <button class="open-button" onclick="openForm()">Chat</button>
+  <div class="chat-popup" id="myForm">
+
+    <form id="form-container" action="">
+      <h1>Chat</h1>
+      <ul id="messages"></ul>
+      <label for="msg"><b>Message</b></label>
+      <input placeholder="Type message.." id="input" autocomplete="off" /><button>Send</button>
+  
+      <button type="submit" class="btn">Send</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+<section>
+  <div style="  color: #fff;
+  background: #2d2d2d;
+  padding: 12px;
+  display: inline-block;"id="users" > 
+    <ul ></ul>
+    </div>
+  <div id="sketch">
+    <canvas id="paint"></canvas>
+  </div>
+ <div style="  color: #fff;
+ background: #2d2d2d;
+ padding: 12px;
+ display: inline-block;">3</div>
+</section>
+ 
+
+
+   
+
+      
+  <div class="colors">
+    <div class="color black"></div>
+    <div class="color red"></div>
+    <div class="color green"></div>
+    <div class="color blue"></div>
+    <div class="color yellow"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+  </script>
+</body>
+</html>
